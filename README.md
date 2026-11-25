@@ -25,7 +25,7 @@ Full-lifecycle identity and fraud intelligence: a public marketing site plus a w
 | --- | --- |
 | `NEXT_PUBLIC_SUPABASE_URL`, `NEXT_PUBLIC_SUPABASE_ANON_KEY` | Supabase project API settings |
 | `SUPABASE_SERVICE_ROLE_KEY` | Server only. Needed for `/admin` approvals |
-| `GEMINI_API_KEY`, `GEMINI_MODEL` | Server only |
+| `GEMINI_API_KEY`, `GEMINI_MODEL` (default gemini-flash-lite-latest) | Server only |
 | `ADMIN_EMAILS` | Comma-separated emails allowed to approve payments |
 | `NEXT_PUBLIC_SELAR_*_URL` | Selar payment links |
 | `NEXT_PUBLIC_SITE_URL` | Your deployed URL |
@@ -38,7 +38,7 @@ Import the repository, add the environment variables above, deploy. Never commit
 
 ## Known limitations
 
-- Supabase credentials were not supplied, so auth, database, storage and the dashboard have **not been exercised against a live project**. Type-checking and production build pass; the scoring and matching logic was unit-checked locally.
+- Verified live against the connected Supabase project: schema, RLS, signup trigger, plan-tamper protection, private storage, login, verifications, AI review, payment claim and admin approval. Not yet exercised: email-confirmation sign-up, password reset emails, document upload from the browser form, and Vercel deployment.
 - Third-party data vendors, biometric document verification and real sanctions/PEP feeds are not integrated. Screening runs against lists you add yourself.
 - Payment confirmation is manual (admin approval) because no Selar webhook secret or API was provided.
 - Customer quotes and outcome figures on the marketing pages are labelled sample/target content and must be replaced with real, approved material.
