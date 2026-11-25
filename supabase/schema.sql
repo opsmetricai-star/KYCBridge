@@ -209,3 +209,5 @@ create table if not exists public.leads (
 );
 alter table public.leads enable row level security;
 create policy leads_insert on public.leads for insert to anon, authenticated with check (true);
+
+-- See supabase/grants.sql for the table privileges the Data API needs.
