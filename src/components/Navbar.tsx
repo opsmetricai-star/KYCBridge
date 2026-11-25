@@ -1,14 +1,9 @@
 "use client";
 import Link from "next/link";
 import { useEffect, useRef, useState } from "react";
-import { ChevronDown, Globe, Menu, User, X } from "lucide-react";
+import { ChevronDown, ChevronRight, Menu, X } from "lucide-react";
 import { Logo } from "./Logo";
 import { NAV, pagesIn } from "@/lib/site";
-
-const USE_CASE_GROUPS: { title: string; items: string[] }[] = [
-  { title: "Full-lifecycle fraud prevention", items: ["ATO fraud", "Business fraud", "Credit fraud", "Fraud ring attacks", "Identity fraud", "Money muling", "New account fraud", "Scams"] },
-  { title: "Risk-based authentication", items: ["External account ownership", "Login and device management", "Risk-based authentication", "Step-up verification management"] },
-];
 
 export function Navbar({ signedIn = false }: { signedIn?: boolean }) {
   const [open, setOpen] = useState<string | null>(null);
@@ -42,9 +37,8 @@ export function Navbar({ signedIn = false }: { signedIn?: boolean }) {
             ))}
           </nav>
           <div className="flex items-center gap-3">
-            <span className="hidden items-center gap-1 text-sm font-semibold sm:flex"><Globe size={14} /> US <ChevronDown size={13} /></span>
-            <Link href={signedIn ? "/dashboard" : "/login"} aria-label="Account" className="hidden h-10 w-10 items-center justify-center rounded-full border border-ink sm:flex"><User size={18} /></Link>
-            <Link href="/contact" className="btn btn-dark arrow hidden whitespace-nowrap sm:inline-flex">Schedule a demo</Link>
+            <Link href={signedIn ? "/dashboard" : "/login"} className="btn btn-ghost hidden whitespace-nowrap sm:inline-flex">{signedIn ? "Dashboard" : "Log in"}</Link>
+            {!signedIn && <Link href="/signup" className="btn btn-dark hidden whitespace-nowrap sm:inline-flex">Sign up</Link>}
             <button className="lg:hidden" aria-label="Menu" onClick={() => setMobile(!mobile)}>{mobile ? <X /> : <Menu />}</button>
           </div>
         </div>
@@ -53,22 +47,12 @@ export function Navbar({ signedIn = false }: { signedIn?: boolean }) {
           <div className="hidden px-8 pb-8 pt-2 lg:block">
             <p className="eyebrow mb-4 flex items-center gap-2 text-ink/70"><span className="h-2 w-2 rounded-full bg-ink/70" />{current.label}</p>
             <p className="mb-8 max-w-2xl text-[22px] leading-snug">{current.intro}</p>
-            {current.key === "use-cases" && (
-              <div className="mb-4 space-y-3">
-                {USE_CASE_GROUPS.map((g) => (
-                  <div key={g.title} className="rounded-2xl bg-bone px-6 py-5">
-                    <p className="mb-3 font-medium">{g.title}</p>
-                    <div className="flex flex-wrap gap-x-8 gap-y-2 text-[14px] text-ink/75">{g.items.map((i) => <span key={i}>{i}</span>)}</div>
-                  </div>
-                ))}
-              </div>
-            )}
-            <div className="grid grid-cols-3 gap-3">
+            <div className="grid grid-cols-2 gap-3 xl:grid-cols-3">
               {pagesIn(current.key).map((p) => (
                 <Link key={p.slug} href={`/${p.section}/${p.slug}`} onClick={() => setOpen(null)}
                   className="group flex items-start justify-between gap-4 rounded-2xl bg-bone px-6 py-5 transition hover:bg-[#e2e2db]">
                   <span><span className="block font-medium">{p.title}</span><span className="mt-1 block text-[14px] leading-snug text-ink/60">{p.short}</span></span>
-                  <span className="mt-1 text-[9px] transition group-hover:translate-x-1">▶</span>
+                  <ChevronRight size={16} className="mt-1 shrink-0 transition group-hover:translate-x-1" />
                 </Link>
               ))}
             </div>
@@ -93,8 +77,8 @@ export function Navbar({ signedIn = false }: { signedIn?: boolean }) {
             ))}
             <Link href="/pricing" onClick={() => setMobile(false)} className="block border-b border-ink/10 py-4 text-lg">Pricing</Link>
             <div className="mt-5 flex gap-3">
-              <Link href={signedIn ? "/dashboard" : "/login"} className="btn btn-ghost">{signedIn ? "Dashboard" : "Log in"}</Link>
-              <Link href="/contact" className="btn btn-dark arrow">Schedule a demo</Link>
+              <Link href={signedIn ? "/dashboard" : "/login"} onClick={() => setMobile(false)} className="btn btn-ghost">{signedIn ? "Dashboard" : "Log in"}</Link>
+              {!signedIn && <Link href="/signup" onClick={() => setMobile(false)} className="btn btn-dark">Sign up</Link>}
             </div>
           </div>
         )}

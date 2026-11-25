@@ -28,13 +28,13 @@ export const PLANS: Plan[] = [
     id: "growth", name: "Growth", price: 57, blurb: "For scaling teams that need automation and full-lifecycle controls.",
     checks: 1000, aiReviews: 300, seats: 10,
     url: process.env.NEXT_PUBLIC_SELAR_GROWTH_URL ?? "https://selar.com/57plan?currency=USD",
-    features: ["1,000 identity checks / month", "300 AI case reviews / month", "Custom decision workflows", "Fraud signal analytics", "10 team seats"],
+    features: ["1,000 identity checks / month", "300 AI case reviews / month", "Custom decision workflows", "Risk analytics dashboard", "10 team seats"],
   },
   {
     id: "scale", name: "Scale", price: 97, blurb: "For regulated institutions running KYC and KYB at volume.",
     checks: 5000, aiReviews: 1500, seats: 50,
     url: process.env.NEXT_PUBLIC_SELAR_SCALE_URL ?? "https://selar.com/97plan?currency=USD",
-    features: ["5,000 identity checks / month", "1,500 AI case reviews / month", "KYB business verification", "Priority support", "50 team seats"],
+    features: ["5,000 identity checks / month", "1,500 AI case reviews / month", "KYB business verification", "50 team seats"],
   },
 ];
 

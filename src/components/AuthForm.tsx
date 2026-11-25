@@ -8,17 +8,24 @@ import { Logo } from "./Logo";
 type Mode = "login" | "signup" | "forgot" | "reset";
 const TITLES: Record<Mode, string> = { login: "Welcome back", signup: "Create your account", forgot: "Reset your password", reset: "Choose a new password" };
 
+/** Public site URL for email links. Never localhost in production. */
+function siteBase() {
+  const env = process.env.NEXT_PUBLIC_SITE_URL;
+  if (env && !/localhost|127\.0\.0\.1/.test(env)) return env.replace(/\/$/, "");
+  return location.origin;
+}
+
 function Inner({ mode }: { mode: Mode }) {
   const router = useRouter();
   const sp = useSearchParams();
   const [busy, setBusy] = useState(false);
   const [err, setErr] = useState("");
-  const [info, setInfo] = useState(sp.get("setup") ? "Supabase is not configured yet. Add the environment variables from .env.example." : "");
+  const [info, setInfo] = useState(sp.get("setup") ? "Sign-in is temporarily unavailable. Please try again shortly." : sp.get("error") ? "That link is invalid or has expired. Request a new one." : "");
 
   async function submit(e: React.FormEvent<HTMLFormElement>) {
     e.preventDefault();
     setErr(""); setInfo("");
-    if (!process.env.NEXT_PUBLIC_SUPABASE_URL) { setErr("Supabase is not configured. See README."); return; }
+    if (!process.env.NEXT_PUBLIC_SUPABASE_URL) { setErr("Sign-in is temporarily unavailable. Please try again shortly."); return; }
     const fd = Object.fromEntries(new FormData(e.currentTarget)) as Record<string, string>;
     setBusy(true);
     const sb = createClient();
@@ -33,13 +40,13 @@ function Inner({ mode }: { mode: Mode }) {
         if (fd.password.length < 8) throw new Error("Password must be at least 8 characters.");
         const { data, error } = await sb.auth.signUp({
           email: fd.email, password: fd.password,
-          options: { data: { full_name: fd.full_name, company: fd.company }, emailRedirectTo: `${location.origin}/dashboard` },
+          options: { data: { full_name: fd.full_name, company: fd.company }, emailRedirectTo: `${siteBase()}/auth/callback?next=/dashboard` },
         });
         if (error) throw error;
         if (data.session) { router.replace("/dashboard"); router.refresh(); }
         else setInfo("Check your email to confirm your account, then log in.");
       } else if (mode === "forgot") {
-        const { error } = await sb.auth.resetPasswordForEmail(fd.email, { redirectTo: `${location.origin}/reset-password` });
+        const { error } = await sb.auth.resetPasswordForEmail(fd.email, { redirectTo: `${siteBase()}/auth/callback?next=/reset-password` });
         if (error) throw error;
         setInfo("If that email exists, a reset link is on its way.");
       } else {

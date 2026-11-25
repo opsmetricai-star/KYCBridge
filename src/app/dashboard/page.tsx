@@ -25,7 +25,7 @@ export default async function Overview() {
     <div>
       <div className="flex flex-wrap items-center justify-between gap-4">
         <div><h1 className="text-[32px] tracking-tight">Overview</h1><p className="text-ink/60">{org.name} · {plan.name} plan</p></div>
-        <Link href="/dashboard/verifications/new" className="btn btn-dark arrow">New verification</Link>
+        <Link href="/dashboard/verifications/new" className="btn btn-dark">New verification</Link>
       </div>
       <div className="mt-8 grid gap-4 sm:grid-cols-2 xl:grid-cols-4">
         {cards.map(([l, v]) => <div key={l} className="rounded-3xl bg-bone p-6"><p className="text-sm text-ink/60">{l}</p><p className="mt-2 text-[34px] tracking-tight">{v}</p></div>)}

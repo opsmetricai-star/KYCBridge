@@ -45,13 +45,13 @@ export function NewVerificationForm({ orgId }: { orgId: string }) {
       <L t="Country (ISO-2, e.g. US)"><input name="country" required maxLength={2} className={`${f} uppercase`} /></L>
       <L t="Phone"><input name="phone" className={f} /></L>
       <L t="Address"><input name="address" className={f} /></L>
-      <L t="ID type"><select name="id_type" className={f} defaultValue="passport"><option value="passport">Passport</option><option value="national_id">National ID</option><option value="drivers_license">Driver&apos;s licence</option><option value="none">None</option></select></L>
+      <L t="ID type"><select name="id_type" className={f} defaultValue="passport"><option value="passport">Passport</option><option value="national_id">National ID</option><option value="drivers_license">Driver&apos;s license</option><option value="none">None</option></select></L>
       <L t="ID number"><input name="id_number" className={f} /></L>
       <L t="Entity type"><select name="entity_type" className={f}><option value="individual">Individual (KYC)</option><option value="business">Business (KYB)</option></select></L>
       <L t="Channel"><select name="channel" className={f}><option value="web">Web</option><option value="mobile">Mobile</option><option value="branch">Branch</option><option value="api">API</option></select></L>
       <div className="sm:col-span-2"><L t="ID document image (PNG, JPG, WEBP or PDF, max 8 MB)"><input name="document" type="file" accept="image/png,image/jpeg,image/webp,application/pdf" className={f} /></L></div>
       {err && <p role="alert" className="text-sm text-plum sm:col-span-2">{err}</p>}
-      <div className="sm:col-span-2"><button disabled={busy} className="btn btn-dark arrow disabled:opacity-60">{busy ? "Running checks…" : "Run verification"}</button></div>
+      <div className="sm:col-span-2"><button disabled={busy} className="btn btn-dark disabled:opacity-60">{busy ? "Running checks…" : "Run verification"}</button></div>
     </form>
   );
 }

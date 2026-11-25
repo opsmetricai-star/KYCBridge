@@ -1,5 +1,6 @@
 import Link from "next/link";
 import { notFound } from "next/navigation";
+import { ChevronRight } from "lucide-react";
 import { PAGES, findPage, pagesIn, NAV } from "@/lib/site";
 
 export function generateStaticParams() {
@@ -18,12 +19,12 @@ export default async function SitePage({ params }: { params: Promise<{ section: 
     <>
       <section className="bg-bone pt-[100px]">
         <div className="mx-auto max-w-[1320px] px-6 py-20 sm:px-10">
-          <p className="eyebrow flex items-center gap-2"><span className="h-2 w-2 rounded-full bg-ink/70" />{sectionLabel} / {page.title}</p>
-          <h1 className="mt-6 max-w-4xl text-[40px] font-normal leading-[1.05] tracking-tight sm:text-[64px]">{page.headline}</h1>
+          <p className="eyebrow flex items-center gap-2"><span className="h-2 w-2 rounded-full bg-ink/70" />{sectionLabel}: {page.title}</p>
+          <h1 className="mt-6 max-w-4xl text-[36px] font-normal leading-[1.05] tracking-tight sm:text-[60px]">{page.headline}</h1>
           <p className="mt-8 max-w-2xl text-[19px] leading-relaxed text-ink/80">{page.lede}</p>
           <div className="mt-8 flex flex-wrap gap-3">
-            <Link href="/contact" className="btn btn-dark arrow">Schedule a demo</Link>
-            <Link href="/signup" className="btn btn-coral arrow">Start free</Link>
+            <Link href="/signup" className="btn btn-dark">Sign up</Link>
+            <Link href="/login" className="btn btn-coral">Log in</Link>
           </div>
         </div>
       </section>
@@ -39,30 +40,23 @@ export default async function SitePage({ params }: { params: Promise<{ section: 
         </div>
       </section>
 
-      <section className="bg-paper">
-        <div className="mx-auto grid max-w-[1320px] gap-px px-6 pb-20 sm:grid-cols-3 sm:px-10">
-          {page.stats.map((s) => (
-            <div key={s.label} className="border-t border-ink/20 py-8 pr-6"><p className="text-[56px] leading-none tracking-tight">{s.value}</p><p className="mt-3 text-ink/70">{s.label}</p></div>
-          ))}
-        </div>
-      </section>
-
       <section className="bg-bone">
         <div className="mx-auto grid max-w-[1320px] gap-10 px-6 py-20 sm:px-10 lg:grid-cols-2">
-          <h2 className="text-[34px] leading-tight sm:text-[44px]">What&apos;s included</h2>
+          <h2 className="text-[32px] leading-tight sm:text-[44px]">Capabilities</h2>
           <ul className="space-y-3">
-            {page.bullets.map((b) => <li key={b} className="flex items-center gap-4 rounded-2xl bg-paper px-6 py-4 text-[17px]"><span className="h-2 w-2 rounded-full bg-coral" />{b}</li>)}
+            {page.bullets.map((b) => <li key={b} className="flex items-center gap-4 rounded-2xl bg-paper px-6 py-4 text-[17px]"><span className="h-2 w-2 shrink-0 rounded-full bg-coral" />{b}</li>)}
           </ul>
         </div>
       </section>
 
       <section className="bg-paper">
         <div className="mx-auto max-w-[1320px] px-6 py-20 sm:px-10">
-          <h2 className="text-[30px]">Keep exploring</h2>
+          <h2 className="text-[30px]">Related</h2>
           <div className="mt-8 grid gap-4 md:grid-cols-3">
             {related.map((p) => (
-              <Link key={p.slug} href={`/${p.section}/${p.slug}`} className="rounded-3xl bg-bone p-7 transition hover:bg-[#e2e2db]">
-                <p className="text-xl">{p.title}</p><p className="mt-2 text-ink/65">{p.short}</p><p className="eyebrow mt-6 text-[11px]">Learn more ▶</p>
+              <Link key={p.slug} href={`/${p.section}/${p.slug}`} className="flex flex-col justify-between rounded-3xl bg-bone p-7 transition hover:bg-[#e2e2db]">
+                <div><p className="text-xl">{p.title}</p><p className="mt-2 text-ink/65">{p.short}</p></div>
+                <ChevronRight className="mt-6" size={18} />
               </Link>
             ))}
           </div>
@@ -71,8 +65,8 @@ export default async function SitePage({ params }: { params: Promise<{ section: 
 
       <section className="bg-coral">
         <div className="mx-auto flex max-w-[1320px] flex-wrap items-center justify-between gap-6 px-6 py-16 sm:px-10">
-          <h2 className="max-w-2xl text-[32px] leading-tight sm:text-[44px]">See KYCBridge work on your own applicants</h2>
-          <Link href="/signup" className="btn btn-dark arrow">Create a free account</Link>
+          <h2 className="max-w-2xl text-[30px] leading-tight sm:text-[44px]">Run the engine on your own applicants</h2>
+          <Link href="/signup" className="btn btn-dark">Create account</Link>
         </div>
       </section>
     </>

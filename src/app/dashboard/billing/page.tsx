@@ -1,3 +1,4 @@
+import { Check } from "lucide-react";
 import { getContext } from "@/lib/context";
 import { PLANS } from "@/lib/plans";
 import { ClaimForm } from "@/components/ClaimForm";
@@ -24,7 +25,7 @@ export default async function Billing({ searchParams }: { searchParams: Promise<
         {PLANS.filter((p) => p.url).map((p) => (
           <div key={p.id} className={`flex flex-col rounded-3xl p-6 ${p.id === plan.id ? "bg-blush" : "bg-bone"}`}>
             <p className="eyebrow">{p.name}</p><p className="mt-3 text-[40px] leading-none">${p.price}<span className="text-sm opacity-60"> /mo</span></p>
-            <ul className="mt-4 flex-1 space-y-1 text-sm">{p.features.map((x) => <li key={x}>✓ {x}</li>)}</ul>
+            <ul className="mt-4 flex-1 space-y-1 text-sm">{p.features.map((x) => <li key={x} className="flex gap-2"><Check size={14} className="mt-0.5 shrink-0" />{x}</li>)}</ul>
             {p.id === plan.id ? <p className="mt-5 text-sm">Your current plan</p> : <a href={p.url!} target="_blank" rel="noopener noreferrer" className="btn btn-dark mt-5 justify-center">Pay on Selar</a>}
           </div>
         ))}

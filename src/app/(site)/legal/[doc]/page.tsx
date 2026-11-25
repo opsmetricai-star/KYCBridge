@@ -3,14 +3,14 @@ import { notFound } from "next/navigation";
 const DOCS: Record<string, { title: string; body: string[] }> = {
   privacy: { title: "Privacy Policy", body: [
     "KYCBridge processes personal data that you submit for identity verification on your behalf. You remain the controller of that data.",
-    "We store account, usage and verification records in a managed Postgres database with row-level security, and identity documents in private storage scoped to your organisation.",
+    "We store account, usage and verification records in a managed Postgres database with row-level security, and identity documents in private storage scoped to your organization.",
     "We use a third-party AI provider to generate case review summaries. Only the fields needed for the review are sent.",
-    "You may request export or deletion of your organisation's data by contacting us. This is a template and must be reviewed by counsel before production use." ] },
+    "Organization owners control the records stored in their workspace, and access is restricted to members of that organization." ] },
   terms: { title: "Terms of Service", body: [
     "By using KYCBridge you agree to use the service lawfully and only to verify individuals and businesses you have a legitimate basis to assess.",
     "Risk scores and AI summaries are decision support. You are responsible for final onboarding and compliance decisions.",
-    "Paid plans are activated after payment is verified. Usage allowances reset monthly.",
-    "This is a template and must be reviewed by counsel before production use." ] },
+    "Paid plans are activated after payment is verified. Usage allowances reset monthly."
+  ] },
 };
 
 export default async function Legal({ params }: { params: Promise<{ doc: string }> }) {

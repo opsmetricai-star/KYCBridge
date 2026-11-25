@@ -10,7 +10,7 @@ export async function POST(req: Request) {
   if (!ctx) return NextResponse.json({ error: "Unauthorized" }, { status: 401 });
   const body = z.object({ verification_id: z.string().uuid() }).safeParse(await req.json().catch(() => null));
   if (!body.success) return NextResponse.json({ error: "verification_id required" }, { status: 400 });
-  if (!geminiConfigured()) return NextResponse.json({ error: "AI is not configured on the server." }, { status: 503 });
+  if (!geminiConfigured()) return NextResponse.json({ error: "AI review is temporarily unavailable." }, { status: 503 });
 
   const { sb, org, plan, usage } = ctx;
   if (usage.ai_review >= plan.aiReviews) {

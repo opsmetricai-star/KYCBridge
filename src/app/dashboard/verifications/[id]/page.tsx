@@ -35,8 +35,8 @@ export default async function Detail({ params }: { params: Promise<{ id: string 
           <h2 className="mb-3 text-lg">Applicant</h2>
           <dl className="grid grid-cols-[110px_1fr] gap-y-2">
             <dt className="text-ink/60">DOB</dt><dd>{v.date_of_birth}</dd>
-            <dt className="text-ink/60">Phone</dt><dd>{v.phone || "—"}</dd>
-            <dt className="text-ink/60">Address</dt><dd>{v.address || "—"}</dd>
+            <dt className="text-ink/60">Phone</dt><dd>{v.phone || "Not provided"}</dd>
+            <dt className="text-ink/60">Address</dt><dd>{v.address || "Not provided"}</dd>
             <dt className="text-ink/60">ID</dt><dd>{v.id_type}{v.id_number ? ` · ••••${v.id_number.slice(-3)}` : ""}</dd>
             <dt className="text-ink/60">Channel</dt><dd>{v.channel}</dd>
             <dt className="text-ink/60">Watchlist</dt><dd>{v.watchlist_hits} hit(s)</dd>

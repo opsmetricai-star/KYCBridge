@@ -4,7 +4,7 @@ import { nameSimilarity, scoreVerification, verificationInput } from "@/lib/kyc"
 import { supabaseConfigured } from "@/lib/supabase/server";
 
 export async function POST(req: Request) {
-  if (!supabaseConfigured()) return NextResponse.json({ error: "Backend is not configured." }, { status: 503 });
+  if (!supabaseConfigured()) return NextResponse.json({ error: "Service temporarily unavailable." }, { status: 503 });
   const ctx = await getApiContext();
   if (!ctx) return NextResponse.json({ error: "Unauthorized" }, { status: 401 });
   const { sb, user, org, plan, usage } = ctx;
@@ -17,7 +17,7 @@ export async function POST(req: Request) {
     return NextResponse.json({ error: parsed.error.issues.map((i) => `${i.path.join(".")}: ${i.message}`).join("; ") }, { status: 400 });
   }
   const input = parsed.data;
-  // Documents must live in this organisation's folder.
+  // Documents must live in this organization's folder.
   if (input.document_path && !input.document_path.startsWith(`${org.id}/`)) {
     return NextResponse.json({ error: "Invalid document path." }, { status: 400 });
   }

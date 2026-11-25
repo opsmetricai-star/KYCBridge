@@ -15,7 +15,7 @@ export default async function Verifications({ searchParams }: { searchParams: Pr
     <div>
       <div className="flex flex-wrap items-center justify-between gap-4">
         <h1 className="text-[32px] tracking-tight">Verifications</h1>
-        <Link href="/dashboard/verifications/new" className="btn btn-dark arrow">New verification</Link>
+        <Link href="/dashboard/verifications/new" className="btn btn-dark">New verification</Link>
       </div>
       <form className="mt-6 flex flex-wrap gap-3">
         <input name="q" defaultValue={q} placeholder="Search by name" aria-label="Search by name" className="rounded-full border border-ink/20 bg-white px-5 py-2.5" />

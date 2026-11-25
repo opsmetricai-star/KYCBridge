@@ -14,24 +14,25 @@ export function Footer() {
                 {pagesIn(n.key).map((p) => (
                   <li key={p.slug}><Link className="hover:text-coral" href={`/${p.section}/${p.slug}`}>{p.title}</Link></li>
                 ))}
-                {n.key === "resources" && <li><Link className="hover:text-coral" href="/contact">Get in touch</Link></li>}
               </ul>
             </div>
           ))}
+          <div>
+            <p className="eyebrow mb-5 text-white/50">Get started</p>
+            <ul className="space-y-3 text-[15px]">
+              <li><Link className="hover:text-coral" href="/pricing">Pricing</Link></li>
+              <li><Link className="hover:text-coral" href="/signup">Sign up</Link></li>
+              <li><Link className="hover:text-coral" href="/login">Log in</Link></li>
+            </ul>
+          </div>
         </div>
         <div className="mt-16 flex flex-wrap items-center justify-between gap-6 border-t border-white/15 pt-8">
-          <div className="flex flex-wrap items-center gap-4">
-            <Logo className="text-white" />
-            <span className="rounded-full border border-white/30 px-3 py-1 text-[11px] uppercase tracking-wider">Enterprise-grade security</span>
+          <Logo className="text-white" />
+          <div className="flex flex-wrap gap-x-6 gap-y-2 text-[13px] text-white/60">
+            <span>© {new Date().getFullYear()} KYCBridge</span>
+            <Link href="/legal/privacy" className="hover:text-white">Privacy Policy</Link>
+            <Link href="/legal/terms" className="hover:text-white">Terms of Service</Link>
           </div>
-          <Link href="/contact" className="btn btn-coral arrow">Schedule a demo</Link>
-        </div>
-        <div className="mt-8 flex flex-wrap gap-x-6 gap-y-2 text-[13px] text-white/60">
-          <span>© {new Date().getFullYear()} KYCBridge</span>
-          <Link href="/contact" className="hover:text-white">Contact Us</Link>
-          <Link href="/legal/privacy" className="hover:text-white">Privacy Policy</Link>
-          <Link href="/legal/terms" className="hover:text-white">Terms of Service</Link>
-          <Link href="/pricing" className="hover:text-white">Pricing</Link>
         </div>
       </div>
     </footer>

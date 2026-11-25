@@ -20,7 +20,7 @@ export function AiReviewPanel({ id, initial }: { id: string; initial: (AiReview 
     <div className="rounded-3xl bg-plum p-6 text-white">
       <div className="flex items-center justify-between gap-4">
         <h2 className="text-lg">AI case review</h2>
-        <button onClick={run} disabled={busy} className="btn btn-light disabled:opacity-60">{busy ? "Analysing…" : review ? "Re-run" : "Run AI review"}</button>
+        <button onClick={run} disabled={busy} className="btn btn-light disabled:opacity-60">{busy ? "Analyzing…" : review ? "Re-run" : "Run AI review"}</button>
       </div>
       {err && <p role="alert" className="mt-4 rounded-xl bg-white/15 p-3 text-sm">{err}</p>}
       {review && (
